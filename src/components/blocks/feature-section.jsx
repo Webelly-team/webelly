@@ -1,4 +1,3 @@
-// src/components/blocks/feature-section.jsx
 'use client';
 import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence, useInView, useAnimation } from "framer-motion";
@@ -80,11 +79,11 @@ export function FeatureSteps({
           {title}
         </motion.h2>
 
-        <div className="flex flex-col md:grid md:grid-cols-2 gap-6 md:gap-10">
+        <div className="flex flex-col md:grid md:grid-cols-2 mt-40 gap-6 md:gap-10">
           <div className="order-2 md:order-1 space-y-8">
             {features.map((feature, index) => (
               <FeatureItem
-                key={index} // Key remains here as it's the top-level element in the map
+                key={index} 
                 feature={feature}
                 index={index}
                 currentFeature={currentFeature}
@@ -165,7 +164,7 @@ export function FeatureSteps({
                       />
                     )}
                     <div
-                      className="absolute bottom-0 left-0 right-0 h-1/3 bg-gradient-to-t from-black via-black/50 to-transparent" />
+                      className="absolute bottom-0 left-0 right-0 h-2/3 bg-gradient-to-t from-black via-black/50 to-transparent" />
                   </motion.div>
                 ))}
             </AnimatePresence>

@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation"
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { LavaLamp } from "@/components/ui/fluid-blob"
-
+import { ContainerScroll } from "@/components/ui/container-scroll-animation";
 import {
   HomeIcon,
   Info,
@@ -15,7 +15,12 @@ import {
 } from 'lucide-react';
 import { FeatureSteps } from "@/components/blocks/feature-section"
 import { Dock, DockIcon, DockItem, DockLabel } from '@/components/ui/dock';
-
+import Image from "next/image"
+import { Spotlight } from "@/components/ui/spotlight"
+import { GridMotion } from "@/components/ui/grid-motion"
+import Testimonals from "@/components/blocks/Testimonals"
+import { PricingDemo } from "@/components/blocks/PricingTable"
+import { Footerdemo } from "@/components/ui/footer-section"
 
 const Page = () => {
   const [showSpiral, setShowSpiral] = useState(true)
@@ -67,11 +72,11 @@ const Page = () => {
       href: '#services',
     },
     {
-      title: 'Testimonials',
+      title: 'Our Work',
       icon: (
         <MessageSquare className='h-full w-full text-neutral-600 dark:text-neutral-300' />
       ),
-      href: '#testimonials',
+      href: '#ourWork',
     },
     {
       title: 'Contact',
@@ -82,6 +87,32 @@ const Page = () => {
     },
   ];
 
+  const gridItems = [
+    'Item 1',
+    <div key='jsx-item-1'>Custom JSX Content</div>,
+    'https://images.unsplash.com/photo-1723403804231-f4e9b515fe9d?q=80&w=3870&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    'Item 2',
+    <div key='jsx-item-2'>Custom JSX Content</div>,
+    'Item 4',
+    <div key='jsx-item-2'>Custom JSX Content</div>,
+    'https://images.unsplash.com/photo-1723403804231-f4e9b515fe9d?q=80&w=3870&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    'Item 5',
+    <div key='jsx-item-2'>Custom JSX Content</div>,
+    'Item 7',
+    <div key='jsx-item-2'>Custom JSX Content</div>,
+    'https://images.unsplash.com/photo-1723403804231-f4e9b515fe9d?q=80&w=3870&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    'Item 8',
+    <div key='jsx-item-2'>Custom JSX Content</div>,
+    'Item 10',
+    <div key='jsx-item-3'>Custom JSX Content</div>,
+    'https://images.unsplash.com/photo-1723403804231-f4e9b515fe9d?q=80&w=3870&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    'Item 11',
+    <div key='jsx-item-2'>Custom JSX Content</div>,
+    'Item 13',
+    <div key='jsx-item-4'>Custom JSX Content</div>,
+    'https://images.unsplash.com/photo-1723403804231-f4e9b515fe9d?q=80&w=3870&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    'Item 14',
+  ];
   const spiralVariants = {
     hidden: { opacity: 1, y: 0 },
     exit: { opacity: 0, transition: { duration: 1, ease: "easeInOut" } }
@@ -176,7 +207,7 @@ const Page = () => {
               </div>
             </motion.div>
 
-            <motion.div className="w-full min-h-screen bg-black pt-20" id="about">
+            <motion.div className="w-full bg-black pt-20" id="about">
               <motion.div
                 initial={{ opacity: 0, x: -100 }}
                 whileInView={{ opacity: 1, x: 0 }}
@@ -197,6 +228,64 @@ const Page = () => {
                 autoPlayInterval={4000}
                 imageHeight="h-[500px]"
               />
+            </motion.div>
+            <motion.div className="w-full min-h-screen bg-black" id="services">
+              <motion.div
+                initial={{ opacity: 0, x: -100 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 0.8, ease: "easeOut" }}
+                className="flex flex-col overflow-hidden pb-[500px] pt-[200px]">
+                <Spotlight />
+                <ContainerScroll
+                  titleComponent={
+                    <>
+                      <h1 className="text-4xl mb-16 font-semibold text-white">
+                        What we offer ? <br />
+                        <span className="text-4xl md:text-[6rem] font-bold mt-1 leading-none">
+                          Our Services
+                        </span>
+                      </h1>
+                    </>
+                  }
+                >
+                  <Image
+                    src={`/services.png`}
+                    alt="hero"
+                    height={720}
+                    width={1400}
+                    className="mx-auto rounded-2xl object-cover h-full object-left-top"
+                    draggable={false}
+                  />
+                </ContainerScroll>
+              </motion.div>
+            </motion.div>
+            <motion.div className="w-full bg-black" id="ourWork">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true, amount: 0.5 }}
+                transition={{
+                  duration: 0.8,
+                  ease: "easeOut",
+                }}
+                className="h-screen w-full bg-black">
+                <GridMotion
+                  items={gridItems.slice(0, 14)}
+                  gradientColor="hsl(var(--brand-foreground))"
+                  className="opacity-75"
+                />
+              </motion.div>
+            </motion.div>
+            <motion.div className="w-full min-h-screen bg-black" id="testimonals">
+              <Testimonals />
+            </motion.div>
+            <motion.div className="w-full min-h-screen bg-black" id="pricing">
+              <PricingDemo />
+            </motion.div>
+
+            <motion.div className="w-full bg-black" id="contact">
+              <Footerdemo />
             </motion.div>
           </>
         )}
