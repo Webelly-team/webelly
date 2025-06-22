@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation"
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { LavaLamp } from "@/components/ui/fluid-blob"
-import { ContainerScroll } from "@/components/ui/container-scroll-animation";
+// import { ContainerScroll } from "@/components/ui/container-scroll-animation";
 import {
   HomeIcon,
   Info,
@@ -16,7 +16,6 @@ import {
 import { FeatureSteps } from "@/components/blocks/feature-section"
 import { Dock, DockIcon, DockItem, DockLabel } from '@/components/ui/dock';
 import Image from "next/image"
-import { Spotlight } from "@/components/ui/spotlight"
 import { GridMotion } from "@/components/ui/grid-motion"
 import Testimonals from "@/components/blocks/Testimonals"
 import { PricingDemo } from "@/components/blocks/PricingTable"
@@ -230,13 +229,12 @@ const Page = () => {
               />
             </motion.div>
             <motion.div className="w-full min-h-screen bg-black" id="services">
-              <motion.div
+              {/* <motion.div
                 initial={{ opacity: 0, x: -100 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true, amount: 0.3 }}
                 transition={{ duration: 0.8, ease: "easeOut" }}
                 className="flex flex-col overflow-hidden pb-[500px] pt-[200px]">
-                <Spotlight />
                 <ContainerScroll
                   titleComponent={
                     <>
@@ -258,7 +256,7 @@ const Page = () => {
                     draggable={false}
                   />
                 </ContainerScroll>
-              </motion.div>
+              </motion.div> */}
             </motion.div>
             <motion.div className="w-full bg-black" id="ourWork">
               <motion.div
@@ -273,7 +271,7 @@ const Page = () => {
                 <GridMotion
                   items={gridItems.slice(0, 14)}
                   gradientColor="hsl(var(--brand-foreground))"
-                  className="opacity-75"
+                  className="opacity-75 hidden md:block"
                 />
               </motion.div>
             </motion.div>
