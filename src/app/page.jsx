@@ -1,11 +1,10 @@
 'use client'
 
 import { SpiralAnimation } from "@/components/ui/spiral-animation"
-import { useRouter } from "next/navigation"
-import { useState, useEffect } from 'react'
+import { useState, useEffect, Suspense, lazy } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { LavaLamp } from "@/components/ui/fluid-blob"
-// import { ContainerScroll } from "@/components/ui/container-scroll-animation";
+import { BusinessForm } from "@/components/blocks/BuisinessForm"
+import { PortfolioSection } from "@/components/blocks/PortfolioSection"
 import {
   HomeIcon,
   Info,
@@ -15,14 +14,18 @@ import {
 } from 'lucide-react';
 import { FeatureSteps } from "@/components/blocks/feature-section"
 import { Dock, DockIcon, DockItem, DockLabel } from '@/components/ui/dock';
-import Image from "next/image"
-import { GridMotion } from "@/components/ui/grid-motion"
-import Testimonals from "@/components/blocks/Testimonals"
 import { PricingDemo } from "@/components/blocks/PricingTable"
 import { Footerdemo } from "@/components/ui/footer-section"
 
+// Lazy load heavy components
+const LavaLamp = lazy(() => import("@/components/ui/fluid-blob").then(module => ({ default: module.LavaLamp })))
+const Testimonals = lazy(() => import("@/components/blocks/Testimonals"))
+
 const Page = () => {
   const [showSpiral, setShowSpiral] = useState(true)
+  const [showBusinessForm, setShowBusinessForm] = useState(false)
+  const [businessProfile, setBusinessProfile] = useState(null)
+  const [isLoading, setIsLoading] = useState(true)
 
   const features = [
     {
@@ -75,7 +78,7 @@ const Page = () => {
       icon: (
         <MessageSquare className='h-full w-full text-neutral-600 dark:text-neutral-300' />
       ),
-      href: '#ourWork',
+      href: '#portfolio',
     },
     {
       title: 'Contact',
@@ -93,25 +96,16 @@ const Page = () => {
     'Item 2',
     <div key='jsx-item-2'>Custom JSX Content</div>,
     'Item 4',
-    <div key='jsx-item-2'>Custom JSX Content</div>,
-    'https://images.unsplash.com/photo-1723403804231-f4e9b515fe9d?q=80&w=3870&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-    'Item 5',
-    <div key='jsx-item-2'>Custom JSX Content</div>,
-    'Item 7',
-    <div key='jsx-item-2'>Custom JSX Content</div>,
-    'https://images.unsplash.com/photo-1723403804231-f4e9b515fe9d?q=80&w=3870&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-    'Item 8',
-    <div key='jsx-item-2'>Custom JSX Content</div>,
-    'Item 10',
     <div key='jsx-item-3'>Custom JSX Content</div>,
     'https://images.unsplash.com/photo-1723403804231-f4e9b515fe9d?q=80&w=3870&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-    'Item 11',
-    <div key='jsx-item-2'>Custom JSX Content</div>,
-    'Item 13',
+    'Item 5',
     <div key='jsx-item-4'>Custom JSX Content</div>,
+    'Item 7',
+    <div key='jsx-item-5'>Custom JSX Content</div>,
     'https://images.unsplash.com/photo-1723403804231-f4e9b515fe9d?q=80&w=3870&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-    'Item 14',
+    'Item 8',
   ];
+
   const spiralVariants = {
     hidden: { opacity: 1, y: 0 },
     exit: { opacity: 0, transition: { duration: 1, ease: "easeInOut" } }
@@ -122,16 +116,50 @@ const Page = () => {
     visible: { opacity: 1, y: 0, transition: { duration: 1.5, ease: "easeOut" } }
   }
 
+  // Check for existing business profile on mount
+  useEffect(() => {
+    const savedProfile = localStorage.getItem('webellyBusinessProfile')
+    if (savedProfile) {
+      try {
+        setBusinessProfile(JSON.parse(savedProfile))
+      } catch (error) {
+        console.error('Error parsing business profile:', error)
+      }
+    }
+    setIsLoading(false)
+  }, [])
+
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowSpiral(false)
+      // Show business form if no profile exists
+      if (!businessProfile && !isLoading) {
+        setTimeout(() => setShowBusinessForm(true), 1000)
+      }
     }, 15000)
 
     return () => clearTimeout(timer)
-  }, [])
+  }, [businessProfile, isLoading])
 
   const navigateToPersonalSite = () => {
     setShowSpiral(false)
+    // Show business form if no profile exists
+    if (!businessProfile && !isLoading) {
+      setTimeout(() => setShowBusinessForm(true), 1000)
+    }
+  }
+
+  const handleBusinessFormSubmit = (formData) => {
+    setBusinessProfile(formData)
+    setShowBusinessForm(false)
+  }
+
+  if (isLoading) {
+    return (
+      <div className="w-full h-screen bg-black flex items-center justify-center">
+        <div className="text-white text-xl">Loading...</div>
+      </div>
+    )
   }
 
   return (
@@ -178,7 +206,9 @@ const Page = () => {
               className="flex items-center justify-center w-full h-screen bg-black"
             >
               <div className="h-screen w-screen flex flex-col justify-center items-center relative">
-                <LavaLamp />
+                <Suspense fallback={<div className="w-full h-full bg-black" />}>
+                  <LavaLamp />
+                </Suspense>
                 <h1 className="text-4xl md:text-6xl lg:text-8xl font-bold tracking-tight mix-blend-exclusion text-white whitespace-nowrap">
                   Think Build Achieve
                 </h1>
@@ -228,36 +258,10 @@ const Page = () => {
                 imageHeight="h-[500px]"
               />
             </motion.div>
-            <motion.div className="w-full min-h-screen bg-black" id="services">
-              {/* <motion.div
-                initial={{ opacity: 0, x: -100 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true, amount: 0.3 }}
-                transition={{ duration: 0.8, ease: "easeOut" }}
-                className="flex flex-col overflow-hidden pb-[500px] pt-[200px]">
-                <ContainerScroll
-                  titleComponent={
-                    <>
-                      <h1 className="text-4xl mb-16 font-semibold text-white">
-                        What we offer ? <br />
-                        <span className="text-4xl md:text-[6rem] font-bold mt-1 leading-none">
-                          Our Services
-                        </span>
-                      </h1>
-                    </>
-                  }
-                >
-                  <Image
-                    src={`/services.png`}
-                    alt="hero"
-                    height={720}
-                    width={1400}
-                    className="mx-auto rounded-2xl object-cover h-full object-left-top"
-                    draggable={false}
-                  />
-                </ContainerScroll>
-              </motion.div> */}
-            </motion.div>
+
+            {/* Portfolio Section */}
+            <PortfolioSection businessType={businessProfile?.businessType} />
+
             <motion.div className="w-full bg-black" id="ourWork">
               <motion.div
                 initial={{ opacity: 0, scale: 0.95 }}
@@ -268,16 +272,20 @@ const Page = () => {
                   ease: "easeOut",
                 }}
                 className="h-screen w-full bg-black">
-                <GridMotion
+                {/* <GridMotion
                   items={gridItems.slice(0, 14)}
                   gradientColor="hsl(var(--brand-foreground))"
                   className="opacity-75 hidden md:block"
-                />
+                /> */}
               </motion.div>
             </motion.div>
+
             <motion.div className="w-full min-h-screen bg-black" id="testimonals">
-              <Testimonals />
+              <Suspense fallback={<div className="w-full h-96 bg-black" />}>
+                <Testimonals />
+              </Suspense>
             </motion.div>
+
             <motion.div className="w-full min-h-screen bg-black" id="pricing">
               <PricingDemo />
             </motion.div>
@@ -288,6 +296,13 @@ const Page = () => {
           </>
         )}
       </AnimatePresence>
+
+      {/* Business Form Modal */}
+      <BusinessForm
+        isOpen={showBusinessForm}
+        onClose={() => setShowBusinessForm(false)}
+        onSubmit={handleBusinessFormSubmit}
+      />
     </div>
   )
 }
