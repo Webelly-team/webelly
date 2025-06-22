@@ -62,16 +62,16 @@ export const CircularTestimonials = ({
   }, []);
 
   // Autoplay
-  useEffect(() => {
-    if (autoplay) {
-      autoplayIntervalRef.current = setInterval(() => {
-        setActiveIndex((prev) => (prev + 1) % testimonialsLength);
-      }, 4000);
-    }
-    return () => {
-      if (autoplayIntervalRef.current) clearInterval(autoplayIntervalRef.current);
-    };
-  }, [autoplay, testimonialsLength]);
+  // useEffect(() => {
+  //   if (autoplay) {
+  //     autoplayIntervalRef.current = setInterval(() => {
+  //       setActiveIndex((prev) => (prev + 1) % testimonialsLength);
+  //     }, 4000);
+  //   }
+  //   return () => {
+  //     if (autoplayIntervalRef.current) clearInterval(autoplayIntervalRef.current);
+  //   };
+  // }, [autoplay, testimonialsLength]);
 
   // useEffect(() => {
   //   const handleKey = (e) => {

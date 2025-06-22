@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://webelly.vercel.app/sitemap.xml

@@ -36,9 +36,7 @@ export const PricingCard = ({
 }) => {
   return (
     (<motion.div
-      initial={{ filter: "blur(2px)" }}
-      whileInView={{ filter: "blur(0px)" }}
-      transition={{ duration: 0.5, ease: "easeInOut", delay: 0.25 }}>
+      >
       <Card
         className={cn(
           "relative h-full w-full overflow-hidden border",
@@ -65,7 +63,7 @@ export const PricingCard = ({
             <Benefit key={index} {...benefit} />
           ))}
         </div>
-        <Button className="w-full" variant={tier === "Pro" ? "default" : "ghost"}>
+        <Button className="w-full cursor-pointer" variant={tier === "Pro" ? "default" : "ghost"}>
           {CTA}
         </Button>
       </Card>
