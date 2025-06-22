@@ -22,7 +22,7 @@ function calculateGap(width) {
 
 export const CircularTestimonials = ({
   testimonials,
-  autoplay = true,
+  autoplay = false,
   colors = {},
   fontSizes = {}
 }) => {
