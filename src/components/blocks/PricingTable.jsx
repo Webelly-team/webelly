@@ -85,7 +85,7 @@ function PricingDemo() {
   const pricingPlans = [
     {
       tier: "Professional",
-      price: "Contact us..",
+      price: "Pricing According to your needs",
       description: "Ideal for growing businesses with advanced needs",
       features: [
         { text: "Custom Website Design", included: true },
