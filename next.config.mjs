@@ -10,9 +10,22 @@ const nextConfig = {
 
   // Image optimization
   images: {
-    domains: ['images.unsplash.com', 'unsplash.com'],
-    formats: ['image/webp', 'image/avif'],
-    minimumCacheTTL: 60 * 60 * 24 * 30, // 30 days
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'images.unsplash.com', // Add this line
+        port: '',
+        pathname: '/**', // Allows any path on Unsplash images
+      },
+      // Keep any other remotePatterns you might have configured
+      // For example, if you had other domains before:
+      // {
+      //   protocol: 'https',
+      //   hostname: 'example.com',
+      //   port: '',
+      //   pathname: '/my-images/**',
+      // },
+    ],
   },
 
   // Compression (generally handled by Next.js/servers in production)

@@ -8,17 +8,18 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { ExternalLink, Github, ArrowRight } from 'lucide-react'
+import { Router } from 'next/router'
 
 const portfolioData = {
   ecommerce: [
     {
       id: 1,
-      title: 'Fashion Forward Store',
-      description: 'Modern e-commerce platform with advanced filtering and seamless checkout',
+      title: 'ApniDukan',
+      description: 'Modern inventory management platform with advanced filtering and seamless checkout',
       image: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800&h=600&fit=crop',
-      tags: ['React', 'Node.js', 'Stripe', 'MongoDB'],
+      tags: ['Next.js', 'Node.js', 'MongoDB'],
       category: 'E-commerce',
-      liveUrl: '#',
+      liveUrl: 'https://apni-dukan-alpha.vercel.app',
       githubUrl: '#'
     },
     {
@@ -137,18 +138,6 @@ const portfolioData = {
       liveUrl: '#',
       githubUrl: '#'
     }
-  ],
-  consulting: [
-    {
-      id: 12,
-      title: 'Business Advisors',
-      description: 'Consulting firm website with client portal and resource library',
-      image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&h=600&fit=crop',
-      tags: ['Vue.js', 'Django', 'PostgreSQL', 'Stripe'],
-      category: 'Consulting',
-      liveUrl: '#',
-      githubUrl: '#'
-    }
   ]
 }
 
@@ -223,14 +212,6 @@ const services = {
     'DevOps & Infrastructure',
     'Mobile App Development',
     'AI/ML Integration'
-  ],
-  consulting: [
-    'Professional Service Websites',
-    'Client Portal Development',
-    'Resource Management Systems',
-    'Consultation Booking',
-    'Knowledge Base Development',
-    'Business Analytics Dashboards'
   ]
 }
 
@@ -297,7 +278,7 @@ export function PortfolioSection({ businessType = 'corporate' }) {
         </motion.div>
 
         {/* Portfolio Grid */}
-        <motion.div
+        {/* <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.6, delay: 0.4 }}
@@ -354,7 +335,7 @@ export function PortfolioSection({ businessType = 'corporate' }) {
               </motion.div>
             ))}
           </div>
-        </motion.div>
+        </motion.div> */}
 
         {/* CTA */}
         <motion.div
@@ -363,10 +344,10 @@ export function PortfolioSection({ businessType = 'corporate' }) {
           transition={{ duration: 0.6, delay: 0.6 }}
           className="text-center mt-16"
         >
-          <Button size="lg" className="bg-gradient-to-r from-gray-200 cursor-pointer hover:bg-gray-300 to-gray-400 ">
+          {/* <Button size="lg" className="bg-gradient-to-r from-gray-200 cursor-pointer hover:bg-gray-300 to-gray-400 ">
             Start Your Project
             <ArrowRight className="ml-2 h-4 w-4" />
-          </Button>
+          </Button> */}
         </motion.div>
       </div>
     </section>

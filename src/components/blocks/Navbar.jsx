@@ -1,19 +1,18 @@
-// components/ui/Navbar.jsx
 'use client';
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X } from 'lucide-react'; 
+import { Menu, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
-const Navbar = ({ links, className }) => {
+const Navbar = ({ links, className }) => { // 'links' is the expected prop name
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 50) { 
+      if (window.scrollY > 50) {
         setIsScrolled(true);
       } else {
         setIsScrolled(false);
@@ -33,6 +32,9 @@ const Navbar = ({ links, className }) => {
   const handleNavLinkClick = (href) => {
     setIsOpen(false); // Close menu on link click
     if (href.startsWith('#')) {
+      // Use window.location.hash for direct navigation, or scrollIntoView for smooth
+      // If your 'data' onClick is doing the scroll, then this part is less critical.
+      // However, for pure hash links, this is standard.
       document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' });
     }
   };
@@ -53,11 +55,13 @@ const Navbar = ({ links, className }) => {
 
       {/* Desktop Navigation Links */}
       <div className="hidden md:flex items-center space-x-6">
-        {links.map((link, idx) => (
+        {/* Added defensive check: links?.map instead of links.map */}
+        {links?.map((link, idx) => (
           <Link
             key={idx}
             href={link.href}
-            onClick={() => handleNavLinkClick(link.href)}
+            // Pass the onClick directly if it exists, otherwise use handleNavLinkClick
+            onClick={link.onClick ? () => { handleNavLinkClick(link.href); link.onClick(); } : () => handleNavLinkClick(link.href)}
             className="text-neutral-300 hover:text-white transition-colors text-lg font-medium relative group"
           >
             {link.title}
@@ -83,11 +87,13 @@ const Navbar = ({ links, className }) => {
             transition={{ duration: 0.3 }}
             className="absolute top-full left-0 w-full bg-black/80 backdrop-blur-lg border-b border-white/[0.2] md:hidden flex flex-col items-center py-4 space-y-4 rounded-b-lg shadow-lg"
           >
-            {links.map((link, idx) => (
+            {/* Added defensive check: links?.map instead of links.map */}
+            {links?.map((link, idx) => (
               <Link
                 key={idx}
                 href={link.href}
-                onClick={() => handleNavLinkClick(link.href)}
+                // Pass the onClick directly if it exists, otherwise use handleNavLinkClick
+                onClick={link.onClick ? () => { handleNavLinkClick(link.href); link.onClick(); } : () => handleNavLinkClick(link.href)}
                 className="text-white text-lg font-medium hover:text-blue-400 transition-colors w-full text-center py-2"
               >
                 {link.title}

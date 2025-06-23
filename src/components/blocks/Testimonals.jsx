@@ -6,33 +6,36 @@ const Testimonals = () => {
     const testimonials = [
         {
             quote:
-                "I was impressed by the food! And I could really tell that they use high-quality ingredients. The staff was friendly and attentive. I'll definitely be back for more!",
-            name: "Name 1",
-            designation: "Designation jo hai",
+                "I was impressed by the Website! This made my daily reach and engagement grow by 30%. I'll definitely be back for more!",
+            name: "Healthy Jeewan",
+            designation: "Youtuber",
             src:
-                "/person.png",
+                "/projects/healthy-jeewan.png",
+            url:"https://healthyjeevan.co.in"
         },
         {
             quote:
-                "This place exceeded all expectations! The atmosphere is inviting, and the staff truly goes above and beyond. I'll keep returning for more exceptional dining experience.",
-            name: "Name 2",
-            designation: "Designation inki",
+                "Was searching for many softwares for my inventory management, but Webelly team helped me with a custom solution that is easy to use and has all the features I need. Highly recommend!",
+            name: "Balaji Bachat Bazaar",
+            designation: "Shop Owner",
             src:
-                "/image.png",
+                "/projects/apni-dukan.png",
+            url:"https://apni-dukan-alpha.vercel.app"
         },
         {
             quote:
-                "Shining Yam is a hidden gem! The impeccable service and overall attention to detail created a memorable experience. I highly recommend it!",
-            name: "Name 3",
-            designation: "Designatino 3",
+                "Webelly's team is very professional and they delivered my project on time. The quality of work is excellent and I am very satisfied with the results.",
+            name: "Nebula Tech",
+            designation: "Organisation",
             src:
-                "/image2.png",
+                "/projects/nebula.png",
+            url:"https://nebula-hmld.vercel.app/"
         },
     ];
 
     return (
         <>
-            <div className="bg-[#060507] p-16 rounded-lg min-h-[300px] flex flex-wrap gap-6 items-center justify-center relative">
+            <div className="bg-[#060507] p-6 md:p-16 rounded-lg min-h-[300px] flex flex-wrap gap-6 items-center justify-center relative">
                 <div
                     className="items-center justify-center relative flex"
                     style={{ maxWidth: "1024px" }}
