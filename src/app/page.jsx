@@ -10,6 +10,7 @@ import {
   Settings,
   MessageSquare,
   Phone,
+  Spline,
 } from 'lucide-react';
 import { FeatureSteps } from "@/components/blocks/feature-section"
 import { Dock, DockIcon, DockItem, DockLabel } from '@/components/ui/dock';
@@ -286,10 +287,9 @@ const Page = () => {
               >
                 Our Latest Creations
               </motion.h2>
-                <SplineBot/>
-
-
-              <div className="absolute bg-transparent flex flex-col md:flex-row justify-between inset-x-0 top-[20vh] w-full z-10">
+              <SplineBot />
+              
+              <div className="md:absolute bg-transparent flex flex-col md:flex-row md:items-center md:w-full justify-between inset-x-0 top-[20vh] w-full z-10">
                 <ProjectCard project={projects[0]} style={{ position: 'absolute', top: '0', left: '10%', pointerEvents: 'auto' }} />
                 <ProjectCard project={projects[1]} style={{ position: 'absolute', top: '0', left: '50%', transform: 'translateX(-50%)', pointerEvents: 'auto' }} />
                 <ProjectCard project={projects[2]} style={{ position: 'absolute', top: '0', right: '10%', pointerEvents: 'auto' }} />
