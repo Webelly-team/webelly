@@ -4,22 +4,22 @@ import { Check, X, Star } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 
-const PricingCard = ({ 
-  tier, 
-  price, 
+const PricingCard = ({
+  tier,
+  price,
   originalPrice,
-  description, 
-  features, 
+  description,
+  features,
   isPopular = false,
   buttonText = "Get Started",
-  delay = 0 
+  delay = 0
 }) => {
   return (
     <motion.div
       className={cn(
         "relative p-8 rounded-2xl border backdrop-blur-sm transition-all duration-300",
-        isPopular 
-          ? "border-white/30 bg-gradient-to-br from-white/10 to-white/5 shadow-2xl" 
+        isPopular
+          ? "border-white/30 bg-gradient-to-br from-white/10 to-white/5 shadow-2xl"
           : "border-white/10 bg-gradient-to-br from-white/5 to-transparent hover:border-white/20"
       )}
     >
@@ -31,11 +31,11 @@ const PricingCard = ({
           </div>
         </div>
       )}
-      
+
       <div className="text-center mb-8">
         <h3 className="text-2xl font-bold text-white mb-2">{tier}</h3>
         <p className="text-gray-400 text-sm mb-6">{description}</p>
-        
+
         <div className="flex items-baseline justify-center gap-2 mb-2">
           <span className="text-5xl font-bold text-white">{price}</span>
           {originalPrice && (
@@ -67,11 +67,11 @@ const PricingCard = ({
         ))}
       </ul>
 
-      <Button 
+      <Button
         className={cn(
           "w-full py-3 rounded-xl font-semibold transition-all duration-300",
-          isPopular 
-            ? "bg-white text-black hover:bg-gray-100 shadow-lg" 
+          isPopular
+            ? "bg-white text-black hover:bg-gray-100 shadow-lg"
             : "bg-white/10 text-white border border-white/20 hover:bg-white/20 hover:border-white/30"
         )}
       >
@@ -115,7 +115,7 @@ function PricingDemo() {
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl"></div>
         <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl"></div>
       </div>
-      
+
       <div className="relative z-10 max-w-7xl mx-auto">
         {/* Header */}
         <motion.div
@@ -129,7 +129,7 @@ function PricingDemo() {
             Choose Your Plan
           </h2>
           <p className="text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
-            Transform your digital presence with our comprehensive web development packages. 
+            Transform your digital presence with our comprehensive web development packages.
             Each plan is designed to deliver exceptional results tailored to your business needs.
           </p>
         </motion.div>
@@ -148,9 +148,11 @@ function PricingDemo() {
           <p className="text-gray-400 mb-6">
             Need a custom solution? We're here to help you build something extraordinary.
           </p>
-          <Button className="bg-white text-black hover:bg-gray-100 px-8 py-3 rounded-xl font-semibold">
-            Get Custom Quote
-          </Button>
+          <a href="mailto:team.webelly@gmail.com">
+            <Button className="bg-white cursor-pointer text-black hover:bg-gray-100 px-8 py-3 rounded-xl font-semibold">
+              Get Custom Quote
+            </Button>
+          </a>
         </motion.div>
       </div>
     </section>

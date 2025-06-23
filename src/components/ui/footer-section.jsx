@@ -28,8 +28,8 @@ function Footerdemo() {
     (<footer
       className="relative border-t bg-background text-foreground transition-colors duration-300">
       <div className="container mx-auto px-4 py-12 md:px-6 lg:px-8">
-        <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
-          <div className="relative">
+        <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-3">
+          {/* <div className="relative">
             <h2 className="mb-4 text-3xl font-bold tracking-tight">Stay Connected</h2>
             <p className="mb-6 text-muted-foreground">
               Join our newsletter for the latest updates and exclusive offers.
@@ -49,7 +49,7 @@ function Footerdemo() {
             </form>
             <div
               className="absolute -right-4 top-0 h-24 w-24 rounded-full bg-primary/10 blur-2xl" />
-          </div>
+          </div> */}
           <div>
             <h3 className="mb-4 text-lg font-semibold">Quick Links</h3>
             <nav className="space-y-2 text-sm">
@@ -73,9 +73,8 @@ function Footerdemo() {
           <div>
             <h3 className="mb-4 text-lg font-semibold">Contact Us</h3>
             <address className="space-y-2 text-sm not-italic">
-              <p>123 Delhi India</p>
-              <p>Don't know anything</p>
-              <p>Phone: (123) 456-7890</p>
+              <p>Sonipat, Delhi</p>
+              <p>Phone: +91 74040 48120</p>
               <p>Email: team.webelly@gmail.com</p>
             </address>
           </div>
@@ -113,7 +112,7 @@ function Footerdemo() {
                   <TooltipTrigger asChild>
                     <Button variant="outline" size="icon" className="rounded-full">
                       <Instagram className="h-4 w-4" />
-                      <span className="sr-only">Instagram</span>
+                      <a href="https://www.instagram.com/webelly_verse?igsh=MWhoZjN4dXBwdzQ4OQ==" target="_blank" className="sr-only">Instagram</a>
                     </Button>
                   </TooltipTrigger>
                   <TooltipContent>
