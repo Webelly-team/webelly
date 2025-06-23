@@ -74,7 +74,7 @@ class AnimationController {
         this.timeline
             .to(this, {
                 time: 1,
-                duration: 15,
+                duration: 7,
                 repeat: -1,
                 ease: "none",
                 onUpdate: () => this.render()

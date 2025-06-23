@@ -8,6 +8,7 @@ import React, {
 } from "react";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
+import { Link } from "lucide-react";
 
 function calculateGap(width) {
   const minWidth = 1024;
@@ -170,6 +171,7 @@ export const CircularTestimonials = ({
                 style={{ color: colorDesignation, fontSize: fontSizeDesignation }}>
                 {activeTestimonial.designation}
               </p>
+              
               <motion.p
                 className="quote"
                 style={{ color: colorTestimony, fontSize: fontSizeQuote }}>
@@ -195,7 +197,16 @@ export const CircularTestimonials = ({
                     {word}&nbsp;
                   </motion.span>
                 ))}
+                
               </motion.p>
+               <a
+                className="cursor-pointer text-blue-400"
+                href={activeTestimonial.url}
+                target="_blank"
+                style={{ color: colorDesignation, fontSize: fontSizeDesignation }}>
+                  Live Site <Link />
+
+              </a>
             </motion.div>
           </AnimatePresence>
           <div className="arrow-buttons">

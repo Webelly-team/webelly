@@ -1,7 +1,6 @@
 'use client'
-
 import { SpiralAnimation } from "@/components/ui/spiral-animation"
-import { useState, useEffect, Suspense, lazy } from 'react'
+import { useState, useEffect, Suspense, lazy, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { BusinessForm } from "@/components/blocks/BuisinessForm"
 import { PortfolioSection } from "@/components/blocks/PortfolioSection"
@@ -11,13 +10,16 @@ import {
   Settings,
   MessageSquare,
   Phone,
+  Spline,
 } from 'lucide-react';
 import { FeatureSteps } from "@/components/blocks/feature-section"
 import { Dock, DockIcon, DockItem, DockLabel } from '@/components/ui/dock';
 import { PricingDemo } from "@/components/blocks/PricingTable"
 import { Footerdemo } from "@/components/ui/footer-section"
+import SplineBot from "@/components/blocks/SplineBot"
+import ProjectCard from "@/components/blocks/ProjectCard"; 
+import Navbar from "@/components/blocks/Navbar"; 
 
-// Lazy load heavy components
 const LavaLamp = lazy(() => import("@/components/ui/fluid-blob").then(module => ({ default: module.LavaLamp })))
 const Testimonals = lazy(() => import("@/components/blocks/Testimonals"))
 
@@ -26,6 +28,35 @@ const Page = () => {
   const [showBusinessForm, setShowBusinessForm] = useState(false)
   const [businessProfile, setBusinessProfile] = useState(null)
   const [isLoading, setIsLoading] = useState(true)
+  const [cursorX, setCursorX] = useState(0);
+  const [cursorY, setCursorY] = useState(0);
+
+  const projects = [
+    {
+      id: 1,
+      name: 'SAST',
+      image: '/projects/sast.png',
+      liveUrl: 'https://github.com/SASTxNST/Website_SAST'
+    },
+    {
+      id: 2,
+      name: 'Apni Dukan',
+      image: '/projects/apni-dukan.png',
+      liveUrl: 'https://apni-dukan-alpha.vercel.app/'
+    },
+    {
+      id: 3,
+      name: 'Gaming Redefined',
+      image: '/projects/gaming-redefined.png',
+      liveUrl: 'https://gaming-redefined.vercel.app/'
+    },
+    {
+      id: 4,
+      name: 'Nebula',
+      image: '/projects/nebula.png',
+      liveUrl: 'https://nebula-last.vercel.app/'
+    },
+  ];
 
   const features = [
     {
@@ -48,7 +79,7 @@ const Page = () => {
     },
   ]
 
-  const data = [
+  const data = [ // This `data` array can be passed to the Navbar as well
     {
       title: 'Home',
       icon: (
@@ -78,7 +109,7 @@ const Page = () => {
       icon: (
         <MessageSquare className='h-full w-full text-neutral-600 dark:text-neutral-300' />
       ),
-      href: '#portfolio',
+      href: '#ourWork',
     },
     {
       title: 'Contact',
@@ -87,23 +118,6 @@ const Page = () => {
       ),
       href: '#contact',
     },
-  ];
-
-  const gridItems = [
-    'Item 1',
-    <div key='jsx-item-1'>Custom JSX Content</div>,
-    'https://images.unsplash.com/photo-1723403804231-f4e9b515fe9d?q=80&w=3870&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-    'Item 2',
-    <div key='jsx-item-2'>Custom JSX Content</div>,
-    'Item 4',
-    <div key='jsx-item-3'>Custom JSX Content</div>,
-    'https://images.unsplash.com/photo-1723403804231-f4e9b515fe9d?q=80&w=3870&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-    'Item 5',
-    <div key='jsx-item-4'>Custom JSX Content</div>,
-    'Item 7',
-    <div key='jsx-item-5'>Custom JSX Content</div>,
-    'https://images.unsplash.com/photo-1723403804231-f4e9b515fe9d?q=80&w=3870&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-    'Item 8',
   ];
 
   const spiralVariants = {
@@ -116,7 +130,6 @@ const Page = () => {
     visible: { opacity: 1, y: 0, transition: { duration: 1.5, ease: "easeOut" } }
   }
 
-  // Check for existing business profile on mount
   useEffect(() => {
     const savedProfile = localStorage.getItem('webellyBusinessProfile')
     if (savedProfile) {
@@ -132,18 +145,16 @@ const Page = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowSpiral(false)
-      // Show business form if no profile exists
       if (!businessProfile && !isLoading) {
         setTimeout(() => setShowBusinessForm(true), 1000)
       }
-    }, 15000)
+    }, 7000)
 
     return () => clearTimeout(timer)
   }, [businessProfile, isLoading])
 
   const navigateToPersonalSite = () => {
     setShowSpiral(false)
-    // Show business form if no profile exists
     if (!businessProfile && !isLoading) {
       setTimeout(() => setShowBusinessForm(true), 1000)
     }
@@ -216,7 +227,12 @@ const Page = () => {
                   Crafting exceptional digital experiences through innovative design and cutting-edge technology.
                 </p>
               </div>
-              <div className='fixed bottom-2 left-1/2 max-w-full z-20 -translate-x-1/2'>
+
+              {/* Conditional Rendering for Navbar vs Dock */}
+              <div className="md:hidden fixed top-0 left-0 w-full z-20">
+                <Navbar navItems={data} /> {/* Show Navbar on small screens */}
+              </div>
+              <div className='hidden md:block fixed bottom-2 left-1/2 max-w-full z-20 -translate-x-1/2'>
                 <Dock className='items-end pb-3'>
                   {data.map((item, idx) => (
                     <DockItem
@@ -259,28 +275,41 @@ const Page = () => {
               />
             </motion.div>
 
-            {/* Portfolio Section */}
             <PortfolioSection businessType={businessProfile?.businessType} />
 
-            <motion.div className="w-full bg-black" id="ourWork">
-              <motion.div
-                initial={{ opacity: 0, scale: 0.95 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true, amount: 0.5 }}
-                transition={{
-                  duration: 0.8,
-                  ease: "easeOut",
-                }}
-                className="h-screen w-full bg-black">
-                {/* <GridMotion
-                  items={gridItems.slice(0, 14)}
-                  gradientColor="hsl(var(--brand-foreground))"
-                  className="opacity-75 hidden md:block"
-                /> */}
-              </motion.div>
+            <motion.div className="relative w-full bg-black min-h-screen pt-20" id="ourWork">
+               <motion.h2
+                initial={{ opacity: 0, y: -50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ delay: 0.2, duration: 0.8, ease: "easeOut" }}
+                className="relative z-10 text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-16 text-center w-full"
+              >
+                Our Latest Creations
+              </motion.h2>
+              <SplineBot />
+              
+              <div className="md:absolute bg-transparent flex flex-col md:flex-row md:items-center md:w-full justify-between inset-x-0 top-[20vh] w-full z-10">
+                <ProjectCard project={projects[0]} style={{ position: 'absolute', top: '0', left: '10%', pointerEvents: 'auto' }} />
+                <ProjectCard project={projects[1]} style={{ position: 'absolute', top: '0', left: '50%', transform: 'translateX(-50%)', pointerEvents: 'auto' }} />
+                <ProjectCard project={projects[2]} style={{ position: 'absolute', top: '0', right: '10%', pointerEvents: 'auto' }} />
+                <ProjectCard project={projects[3]} style={{ position: 'absolute', top: '200px', left: '50%', transform: 'translateX(-50%)', pointerEvents: 'auto' }} />
+              </div>
+
+              <div className="relative z-0 h-[calc(100vh - 20vh)] w-full"></div>
+
             </motion.div>
 
             <motion.div className="w-full min-h-screen bg-black" id="testimonals">
+              <motion.h2
+                initial={{ opacity: 0, y: -50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ delay: 0.2, duration: 0.8, ease: "easeOut" }}
+                className="relative z-10 text-4xl mt-20 md:text-6xl lg:text-7xl font-bold text-white mb-16 text-center w-full"
+              >
+                What Our Clients Say
+              </motion.h2>
               <Suspense fallback={<div className="w-full h-96 bg-black" />}>
                 <Testimonals />
               </Suspense>
@@ -297,7 +326,6 @@ const Page = () => {
         )}
       </AnimatePresence>
 
-      {/* Business Form Modal */}
       <BusinessForm
         isOpen={showBusinessForm}
         onClose={() => setShowBusinessForm(false)}

@@ -84,27 +84,8 @@ const PricingCard = ({
 function PricingDemo() {
   const pricingPlans = [
     {
-      tier: "Starter",
-      price: "$2,999",
-      originalPrice: "$3,999",
-      description: "Perfect for small businesses and startups",
-      features: [
-        { text: "Responsive Website Design", included: true },
-        { text: "Up to 5 Pages", included: true },
-        { text: "Basic SEO Optimization", included: true },
-        { text: "Contact Form Integration", included: true },
-        { text: "Mobile Optimization", included: true },
-        { text: "1 Month Support", included: true },
-        { text: "E-commerce Integration", included: false },
-        { text: "Advanced Analytics", included: false },
-        { text: "Custom Animations", included: false },
-      ],
-      buttonText: "Start Project",
-      delay: 0
-    },
-    {
       tier: "Professional",
-      price: "$5,999",
+      price: "",
       originalPrice: "$7,999",
       description: "Ideal for growing businesses with advanced needs",
       features: [
@@ -124,30 +105,6 @@ function PricingDemo() {
       buttonText: "Choose Professional",
       isPopular: true,
       delay: 0.1
-    },
-    {
-      tier: "Enterprise",
-      price: "$12,999",
-      originalPrice: "$15,999",
-      description: "Complete solution for large businesses",
-      features: [
-        { text: "Premium Custom Design", included: true },
-        { text: "Unlimited Pages", included: true },
-        { text: "Enterprise SEO Strategy", included: true },
-        { text: "Advanced Form Builder", included: true },
-        { text: "Multi-device Optimization", included: true },
-        { text: "6 Months Support", included: true },
-        { text: "Full E-commerce Solution", included: true },
-        { text: "Advanced Analytics Dashboard", included: true },
-        { text: "Premium Animations & Interactions", included: true },
-        { text: "Social Media Integration", included: true },
-        { text: "Blog/CMS with Admin Panel", included: true },
-        { text: "Payment Gateway Integration", included: true },
-        { text: "User Authentication System", included: true },
-        { text: "API Integrations", included: true },
-      ],
-      buttonText: "Contact Sales",
-      delay: 0.2
     }
   ]
 
@@ -178,7 +135,7 @@ function PricingDemo() {
         </motion.div>
 
         {/* Pricing Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-6">
+        <div className="flex items-center justify-center gap-8 lg:gap-6">
           {pricingPlans.map((plan, index) => (
             <PricingCard key={index} {...plan} />
           ))}
