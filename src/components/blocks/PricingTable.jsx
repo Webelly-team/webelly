@@ -85,8 +85,7 @@ function PricingDemo() {
   const pricingPlans = [
     {
       tier: "Professional",
-      price: "",
-      originalPrice: "$7,999",
+      price: "Contact us..",
       description: "Ideal for growing businesses with advanced needs",
       features: [
         { text: "Custom Website Design", included: true },
@@ -95,12 +94,13 @@ function PricingDemo() {
         { text: "Contact & Lead Forms", included: true },
         { text: "Mobile & Tablet Optimization", included: true },
         { text: "3 Months Support", included: true },
-        { text: "Basic E-commerce (up to 50 products)", included: true },
+        { text: "E-commerce (up to 500 products)", included: true },
         { text: "Google Analytics Integration", included: true },
         { text: "Custom Animations", included: true },
         { text: "Social Media Integration", included: true },
-        { text: "Blog/CMS Setup", included: false },
-        { text: "Advanced E-commerce", included: false },
+        { text: "Blog/CMS Setup", included: true },
+        { text: "Advanced E-commerce", included: true },
+        { text: "24x7 customer support", included: true }
       ],
       buttonText: "Choose Professional",
       isPopular: true,
